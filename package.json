@@ -1,0 +1,26 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "this is a react learning repo",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tech-CK16/react.git"
+  },
+  "keywords": [],
+  "author": "Akshay Saini",
+  "license": "ISC",
+  "devDependencies": {  
+    "parcel": "^2.11.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
