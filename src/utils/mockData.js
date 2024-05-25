@@ -1389,6 +1389,6 @@ const resList = [
             type: "WEBLINK",
         },
     },
-]
+];
 
-export default resList
+export default resList;
