@@ -79,11 +79,13 @@
     margin: 10px;
     background-color: #f0f0f0;
 }
+
 .shimmer-filter {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .shimmer-filter .shimmer-btn {
     width: 100px;
     height: 15px;
@@ -96,4 +98,10 @@
 .login {
     padding: 0 20px;
     cursor: pointer;
+}
+
+.user-card {
+    padding: 10px;
+    border: 1px solid #000;
+    margin-bottom: 1px;
 }
