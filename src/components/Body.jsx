@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { isOpenRes } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -8,6 +8,8 @@ const Body = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
     const [originalListOfRestaurants, setOriginalListOfRestaurants] = useState([]);
     const [searchText, setSearchText] = useState("");
+
+    const RestaurantIsOpen = isOpenRes(RestaurantCard);
 
     useEffect(() => {
         fetchData();
@@ -44,32 +46,36 @@ const Body = () => {
         <Shimmer />
     ) : (
         <div className="body">
-            <div className="filter-container">
-                <div className="className">
+            <div className="filter-container flex justify-center items-center mb-5">
+                <div className="search mr-4">
                     <input
                         type="text"
-                        className="search-box"
-                        placeholder="Enter the Value..."
+                        className="search-box shadow appearance-none border rounded mr-2 py-1 px-4 text-gray-700 focus:outline-none focus:shadow-outline"
+                        placeholder="Search Restaurant..."
                         value={searchText}
                         onChange={e => {
                             setSearchText(e.target.value);
                         }}
                     />
-                    <button className="search-btn" onClick={handleSearch}>
+                    <button className="search-btn bg-blue-500 hover:bg-blue-700 text-white py-1 font-normal px-4 rounded" onClick={handleSearch}>
                         Search
                     </button>
                 </div>
-                <button className="filter-btn" onClick={handleTopRated}>
+                <button className="filter-btn mr-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-4 rounded" onClick={handleTopRated}>
                     Top Rated Restaurants
                 </button>
-                <button className="reset-btn" onClick={handleReset}>
+                <button className="reset-btn bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-4 rounded" onClick={handleReset}>
                     Reset
                 </button>
             </div>
-            <div className="restro-container">
+            <div className="restro-container flex flex-wrap justify-center gap-4">
                 {listOfRestaurants.map(restaurant => (
-                    <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
-                        <RestaurantCard resData={restaurant} />
+                    <Link
+                        className="res-card w-60 rounded overflow-hidden shadow-lg"
+                        key={restaurant.info.id}
+                        to={"/restaurants/" + restaurant.info.id}
+                    >
+                        {restaurant.info.isOpen ? <RestaurantIsOpen resData={restaurant} /> : <RestaurantCard resData={restaurant} />}
                     </Link>
                 ))}
             </div>
