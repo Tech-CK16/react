@@ -1,13 +1,15 @@
 import RestaurantCard, { isOpenRes } from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
     const [originalListOfRestaurants, setOriginalListOfRestaurants] = useState([]);
     const [searchText, setSearchText] = useState("");
+    const { loggedInUser, setUserName } = useContext(UserContext);
 
     const RestaurantIsOpen = isOpenRes(RestaurantCard);
 
@@ -64,9 +66,21 @@ const Body = () => {
                 <button className="filter-btn mr-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-4 rounded" onClick={handleTopRated}>
                     Top Rated Restaurants
                 </button>
-                <button className="reset-btn bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-4 rounded" onClick={handleReset}>
+                <button className="reset-btn mr-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-4 rounded" onClick={handleReset}>
                     Reset
                 </button>
+                <div className="search mr-4">
+                    <label>Username: </label>
+                    <input
+                        type="text"
+                        className="search-box shadow appearance-none border rounded mr-2 py-1 px-4 text-gray-700 focus:outline-none focus:shadow-outline"
+                        placeholder="Search Restaurant..."
+                        value={loggedInUser}
+                        onChange={e => {
+                            setUserName(e.target.value);
+                        }}
+                    />
+                </div>
             </div>
             <div className="restro-container flex flex-wrap justify-center gap-4">
                 {listOfRestaurants.map(restaurant => (
